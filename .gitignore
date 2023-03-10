@@ -1,0 +1,6 @@
+*\.o
+*\.a
+*\_old
+*\.out
+test.c
+tags
