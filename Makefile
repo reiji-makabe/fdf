@@ -6,11 +6,11 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 19:59:37 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/11 20:03:27 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/03/12 02:37:22 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILE := fdf/
+FILE := fdf_dir/
 
 ifdef WITH_DEBUG
 	DEBUG :=-O0 -g3

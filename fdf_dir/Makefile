@@ -6,11 +6,11 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 19:53:21 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/11 22:08:19 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/03/12 02:39:06 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := fdf
+NAME := ../fdf
 CC := cc
 SANITIZE :=-fsanitize=leak -fsanitize=address
 
@@ -21,25 +21,28 @@ endif
 CFLAGS := -Wall -Wextra -Werror $(DEBUG) $(SANITIZE) -I
 RM := rm -rf
 AR := ar -rcs
-
+LINK_DIR := -L ../minilibx-linux/
+LINK :=-lm -lmlx -lXext -lX11 $(LINK_DIR)
 
 INCLUDE := include/
 SRC_DIR := src/
 OBJ_DIR := obj/
 ARCHIVE_DIR := archive/
 LIB_DIR := 42_library/
-LINK :=-lm -mlx -lXext -lX11
+
+LIB := $(filter-out $(LIB_DIR)Makefile, $(wildcard $(LIB_DIR)*))
+ARCHIVE := $(addsuffix .a, $(subst $(LIB_DIR), $(ARCHIVE_DIR), $(LIB)))
 
 SRC := $(wildcard $(SRC_DIR)*.c)
 OBJ := $(addprefix $(OBJ_DIR), $(notdir $(SRC:.c=.o)))
-ARCHIVE := $(wildcard $(ARCHIVE_DIR)*.a)
 
+#command
 all: $(NAME)
 
 $(NAME):$(OBJ)
 	mkdir -p $(OBJ_DIR)
 	make $(ARCHIVE)
-	$(CC) $(CFLAGS) $(INCLUDE) $^ -o $(NAME) $(ARCHIVE)
+	$(CC) $(CFLAGS) $(INCLUDE) $^ -o $(NAME) $(ARCHIVE) $(LINK)
 
 
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
@@ -57,7 +60,7 @@ clean:
 
 fclean: clean
 	make fclean -C $(LIB_DIR)
-	$(RM) $(NAME) $(ARCHIVE_DIR)
+	$(RM) $(NAME) $(ARCHIVE)
 
 norm:
 	@norminette $(SRC_DIR) $(INCLUDE) | grep Error || true

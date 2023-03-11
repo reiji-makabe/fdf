@@ -5,14 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/01 17:35:19 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/05 18:16:47 by rmakabe          ###   ########.fr        #
+#    Created: 2022/11/17 17:01:33 by rmakabe           #+#    #+#              #
+#    Updated: 2023/03/12 02:16:02 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ARCHIVE := ../../archive/
-
-NAME := $(ARCHIVE)libft.a
+NAME := $(ARCHIVE)libftprintf.a
 CC := cc
 
 ifdef WITH_DEBUG
@@ -20,31 +19,37 @@ ifdef WITH_DEBUG
 endif
 
 CFLAGS := -Wall -Wextra -Werror $(DEBUG) -I
+LIBFT_DIR := ./libft/
+LIBFT := $(ARCHIVE)libft.a
 RM := rm -rf
 AR := ar -rcs
 
-INCLUDE := include/
-SRC_DIR := src/
-OBJ_DIR := obj/
 
-SRC := $(wildcard $(SRC_DIR)*.c)
-OBJ := $(addprefix $(OBJ_DIR), $(notdir $(SRC:.c=.o)))
+INCLUDE := include
+SRC_DIR := src
+OBJ_DIR := obj
 
+SRC := $(wildcard $(SRC_DIR)/*.c)
+OBJ := $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
-# command
 all: $(NAME)
 
 $(NAME):$(OBJ)
+	make -C $(LIBFT_DIR)
+	mv $(ARCHIVE)libft.a $(NAME)
 	$(AR) $(NAME) $(OBJ)
 
-$(OBJ_DIR)%.o:$(SRC_DIR)%.c
-	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
+
 clean:
+	make clean -C $(LIBFT_DIR)
 	$(RM) $(OBJ)
 
 fclean: clean
+	make fclean -C $(LIBFT_DIR)
 	$(RM) $(NAME)
 
 re: fclean all
@@ -53,6 +58,6 @@ debug:
 	make WITH_DEBUG=1
 
 norm:
-	norminette $(SRC_DIR) $(INCLUDE) | grep Error || true
+	norminette src/* include/* libft/*.c libft/*.h | grep Error || true
 
-.PHONY: all clean fclean re norm debug
+.PHONY: all clean fclean re debug norm
