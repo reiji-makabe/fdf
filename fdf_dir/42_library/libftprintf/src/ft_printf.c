@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:04:57 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/01/26 19:10:10 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/03/10 00:04:27 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	print_while_fmt(va_list *ap, const char *fmt)
 			tmp = print_arg(ap, *++fmt);
 		else
 			tmp = write(1, fmt, 1);
-		if (tmp <= 0)
+		if (tmp < 0)
 			return (-1);
 		re += tmp;
 		fmt++;
@@ -53,10 +53,12 @@ static int	print_arg(va_list *ap, char type)
 		return (print_string(ap, type));
 	else if (type == 'p')
 		return (print_pointer(va_arg(*ap, size_t)));
-	else if (type == 'd' || type == 'i' || type == 'u')
+	else if (type == 'd' || type == 'i')
 		return (print_decimal(va_arg(*ap, int)));
-	else if (type == 'x' || type == 'X')
+	else if (type == 'x' || type == 'X' || type == 'u')
 		return (print_hex(va_arg(*ap, unsigned int), type));
+	else if (type == '%')
+		return (write(1, &"%", 1));
 	else
 		return (-1);
 }

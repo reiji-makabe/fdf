@@ -6,7 +6,7 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 17:01:33 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/12 02:16:02 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/03/13 16:18:48 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,21 +25,21 @@ RM := rm -rf
 AR := ar -rcs
 
 
-INCLUDE := include
-SRC_DIR := src
-OBJ_DIR := obj
+INCLUDE := include/
+SRC_DIR := src/
+OBJ_DIR := obj/
 
-SRC := $(wildcard $(SRC_DIR)/*.c)
-OBJ := $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
+SRC := $(wildcard $(SRC_DIR)*.c)
+OBJ := $(addprefix $(OBJ_DIR), $(notdir $(SRC:.c=.o)))
 
 all: $(NAME)
 
 $(NAME):$(OBJ)
 	make -C $(LIBFT_DIR)
-	mv $(ARCHIVE)libft.a $(NAME)
+	mv $(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJ)
 
-$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+$(OBJ_DIR)%.o:$(SRC_DIR)%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
@@ -58,6 +58,6 @@ debug:
 	make WITH_DEBUG=1
 
 norm:
-	norminette src/* include/* libft/*.c libft/*.h | grep Error || true
+	norminette $(SRC) $(INCLUDE) | grep Error || true
 
 .PHONY: all clean fclean re debug norm

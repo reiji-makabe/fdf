@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 22:46:56 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/01/07 16:53:18 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/03/13 16:47:37 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	print_string(va_list *ap, char type)
 	else if (type == 's')
 	{
 		str = va_arg(*ap, char *);
+		if (str == NULL)
+			return (write(1, &"(null)", 6));
 		return (write(1, str, ft_strlen(str)));
 	}
 	return (-1);
@@ -64,15 +66,22 @@ int	print_decimal(long long num_int)
 
 int	print_hex(unsigned int num_hex, char letter)
 {
-	char	*num;
+	char			*num;
+	unsigned int	div;
 
+	div = 16;
 	if (letter == 'x')
 		num = "0123456789abcdef";
-	else
+	else if (letter == 'X')
 		num = "0123456789ABCDEF";
-	if (num_hex < 16)
+	else
+	{
+		num = "0123456789";
+		div = 10;
+	}
+	if (num_hex < div)
 		return (write(1, num + num_hex, 1));
 	else
-		return (print_hex(num_hex / 16, letter) + \
-				write(1, num + num_hex % 16, 1));
+		return (print_hex(num_hex / div, letter) + \
+				write(1, num + num_hex % div, 1));
 }
