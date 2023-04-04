@@ -6,7 +6,7 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 19:53:21 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/12 02:39:06 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/03/16 17:04:07 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ endif
 CFLAGS := -Wall -Wextra -Werror $(DEBUG) $(SANITIZE) -I
 RM := rm -rf
 AR := ar -rcs
-LINK_DIR := -L ../minilibx-linux/
-LINK :=-lm -lmlx -lXext -lX11 $(LINK_DIR)
+LINK_DIR := -L ../minilibx-linux -L /usr/lib
+LINK :=$(LINK_DIR) -lm -lmlx -lXext -lX11
 
 INCLUDE := include/
 SRC_DIR := src/
@@ -32,6 +32,8 @@ LIB_DIR := 42_library/
 
 LIB := $(filter-out $(LIB_DIR)Makefile, $(wildcard $(LIB_DIR)*))
 ARCHIVE := $(addsuffix .a, $(subst $(LIB_DIR), $(ARCHIVE_DIR), $(LIB)))
+
+$(addpre)
 
 SRC := $(wildcard $(SRC_DIR)*.c)
 OBJ := $(addprefix $(OBJ_DIR), $(notdir $(SRC:.c=.o)))
@@ -61,6 +63,11 @@ clean:
 fclean: clean
 	make fclean -C $(LIB_DIR)
 	$(RM) $(NAME) $(ARCHIVE)
+
+re: fclean all
+
+debug:
+	make WITH_DEBUG=1
 
 norm:
 	@norminette $(SRC_DIR) $(INCLUDE) | grep Error || true

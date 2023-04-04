@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 04:17:44 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/03/02 21:37:46 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/03/13 19:42:29 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static size_t	check_and_conversion_strings(char *tmp_s, size_t len, char c);
 static int		put_in_strings(char *tmp_s, char **re, size_t num_strings);
-static void		free_2d_array(char **re);
 
 char	**ft_split(char const *s, char c)
 {

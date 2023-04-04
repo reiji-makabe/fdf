@@ -6,12 +6,12 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 17:01:33 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/13 16:18:48 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/03/14 00:20:06 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ARCHIVE := ../../archive/
-NAME := $(ARCHIVE)libftprintf.a
+ARCHIVE_DIR := ../../archive/
+NAME := $(ARCHIVE_DIR)libftprintf.a
 CC := cc
 
 ifdef WITH_DEBUG
@@ -19,13 +19,13 @@ ifdef WITH_DEBUG
 endif
 
 CFLAGS := -Wall -Wextra -Werror $(DEBUG) -I
-LIBFT_DIR := ./libft/
-LIBFT := $(ARCHIVE)libft.a
+LIBFT_DIR := libft/
+LIBFT := $(LIBFT_DIR)libft.a
 RM := rm -rf
 AR := ar -rcs
 
 
-INCLUDE := include/
+INCLUDE := ../../include/
 SRC_DIR := src/
 OBJ_DIR := obj/
 
@@ -58,6 +58,6 @@ debug:
 	make WITH_DEBUG=1
 
 norm:
-	norminette $(SRC) $(INCLUDE) | grep Error || true
+	norminette $(SRC) $(INCLUDE)
 
 .PHONY: all clean fclean re debug norm

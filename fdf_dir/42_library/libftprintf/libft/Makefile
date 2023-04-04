@@ -6,13 +6,11 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 17:35:19 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/12 02:16:19 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/03/14 00:20:18 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ARCHIVE := ../../../archive/
-
-NAME := $(ARCHIVE)libft.a
+NAME := libft.a
 CC := cc
 
 ifdef WITH_DEBUG
@@ -23,7 +21,7 @@ CFLAGS := -Wall -Wextra -Werror $(DEBUG) -I
 RM := rm -rf
 AR := ar -rcs
 
-INCLUDE := include/
+INCLUDE := ../../../include/
 SRC_DIR := src/
 OBJ_DIR := obj/
 

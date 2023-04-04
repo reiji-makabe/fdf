@@ -6,11 +6,11 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 21:23:55 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/11 21:29:03 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/03/16 19:10:14 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-LIBFTPRINTF := ft_printf/
+LIBFTPRINTF := libftprintf/
 GNL := get_next_line/
 
 ifdef WITH_DEBUG
@@ -32,11 +32,11 @@ fclean: clean
 re: fclean all
 
 debug:
-	make WITH_DEBUG -C $(LIBFTPRINTF)
-	make fclean -C $(GNL)
+	make WITH_DEBUG=1 -C $(LIBFTPRINTF)
+	make WITH_DEBUG=1 -C $(GNL)
 
 norm:
 	make norm -C $(LIBFTPRINTF)
-	make fclean -C $(GNL)
+	make norm -C $(GNL)
 
 .PHONY: all clean fclean re debug norm

@@ -1,27 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   map_operate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 23:40:38 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/01/07 16:26:02 by rmakabe          ###   ########.fr       */
+/*   Created: 2023/03/14 18:05:09 by rmakabe           #+#    #+#             */
+/*   Updated: 2023/03/17 09:58:00 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "map.h"
 
-# include <unistd.h>
-# include <limits.h>
-# include <stdarg.h>
-# include "libft.h"
-
-int	ft_printf(const char *fmt, ...);
-int	print_string(va_list *ap, char type);
-int	print_pointer(size_t num_ptr);
-int	print_decimal(long long num_int);
-int	print_hex(unsigned int num_hex, char letter);
-
-#endif

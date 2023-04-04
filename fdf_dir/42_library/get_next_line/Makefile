@@ -1,19 +1,19 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 15:39:18 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/10 15:47:32 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/03/15 18:47:23 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ARCHIVE := ../../archive/
 NAME := $(ARCHIVE)get_next_line.a
+SANITIZE :=-fsanitize=leak
 CC := cc
-SANITIZE :=-fsanitize=address -fsanitize=leak
 
 ifdef WITH_DEBUG
 	DEBUG :=-O0 -g3
@@ -23,7 +23,7 @@ CFLAGS := -Wall -Wextra -Werror $(DEBUG) $(SANITIZE) -I
 RM := rm -rf
 AR := ar -rcs
 
-INCLUDE := include/
+INCLUDE := ../../include/
 SRC_DIR := src/
 OBJ_DIR := obj/
 
