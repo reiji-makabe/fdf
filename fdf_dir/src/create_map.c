@@ -11,7 +11,8 @@
 
 static t_map	**read_map(int fd, int row);
 static t_map	*fill_map_row(char *txt, int index);
-static void		fill_map_point(int x, int y, int z, t_map *point);
+static void		*free_and_return_null(void *subject);
+static void		free_remain_row_and_map(t_map **re, int row);
 
 t_map	**create_map(int fd)
 {
@@ -39,51 +40,56 @@ static t_map	**read_map(int fd, int row)
 	{
 		re = (t_map **)ft_calloc(sizeof(t_map *), (row + 1));
 		if (re == NULL)
-		{
-			free(txt);
-			return (re);
-		}
+			free_and_return_null(txt);
 		re[row] = NULL;
 		return (re);
 	}
 	if (re == NULL)
-	{
-		free(txt);
-		return (re);
-	}
+		free_and_return_null(txt);
 	re[row] = fill_map_row(txt, row);
 	free(txt);
 	if (re[row] == NULL)
+	{
+		free_remain_row_and_map(re, row);
 		return (NULL);
+	}
 	return (re);
 }
-//		re[now] nanka_syori_hituyou_free;
 
-
+// color now
 static t_map	*fill_map_row(char *txt, int index)
 {
-	int		*val;
+	char	*val;
 	size_t	i;
 	size_t	j;
-	t_map	*map;
+	t_map	*row;
 
-	val = char_a_to_int_a(txt, &i);
-	map = (t_map *)malloc(sizeof(t_map) * (i + 1));
+	val = 
+	row = (t_map *)malloc(sizeof(t_map) * (i + 1));
 	if (map == NULL)
 		return (NULL);
 	j = 0;
-	fill_map_point(0, 0, 0, map + i);
+	fill_map_point(0, 0, 0, row + i);
+	(row + i)->end = 1;
 	while (j++ < i)
-		fill_map_point(j - 1, index, val[j - 1], map + j - 1);
-	return (map);
+		fill_map_point(j - 1, index, val[j - 1], row + j - 1);
+	free(val);
+	return (row);
 }
 
-static void	fill_map_point(int x, int y, int z, t_map *point)
+static void		*free_and_return_null(void *subject)
 {
-	point->x = x;
-	point->y = y;
-	point->z = z;
-	point->vx = 0;
-	point->vy = 0;
-	point->vz = 0;
+	free(subject);
+	return (NULL);
+}
+
+static void		free_remain_row_and_map(t_map **re, int row)
+{
+	row++;
+	while (re[row] != NULL)
+	{
+		free(re[row]);
+		row++;
+	}
+	free(re);
 }

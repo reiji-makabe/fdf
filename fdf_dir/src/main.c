@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:14:34 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/03/17 08:18:09 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/04/10 19:54:01 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
 		exit (1);
 	fd = safe_open(argv[1], O_RDONLY);
 	map = create_map(fd);
-	draw_map(map);
+	return (draw_map(map), char argv[1]);
 }
 
 static int	safe_open(char *file, int aut)

@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:38:56 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/03/21 15:30:42 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/04/15 02:01:43 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 4200
 # endif
 
 # include <stdlib.h>

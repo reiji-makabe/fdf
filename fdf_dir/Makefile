@@ -6,7 +6,7 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 19:53:21 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/16 17:04:07 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/04/07 16:00:04 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,20 @@ ifdef WITH_DEBUG
 	DEBUG :=-O0 -g3
 endif
 
-CFLAGS := -Wall -Wextra -Werror $(DEBUG) $(SANITIZE) -I
+ifeq ($(shell uname), Linux)
+	LINK_DIR := -L ../minilibx-linux -L /usr/lib
+	LINK :=$(LINK_DIR) -lm -lz -lmlx -lXext -lX11
+else
+	LINK_DIR :=
+	LINK :=$(LINK_DIR)
+endif
+
+# todo macOS
+
+
+CFLAGS := -Wall -Wextra -Werror -lmlx $(DEBUG) $(SANITIZE) -I
 RM := rm -rf
 AR := ar -rcs
-LINK_DIR := -L ../minilibx-linux -L /usr/lib
-LINK :=$(LINK_DIR) -lm -lmlx -lXext -lX11
 
 INCLUDE := include/
 SRC_DIR := src/
