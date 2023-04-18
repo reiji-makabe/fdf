@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 02:52:48 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/04/15 05:08:56 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/04/18 23:31:05 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <stdio.h>
+# include <stdint.h>
 
 # define SIZE_X 900
 # define SIZE_Y 900
@@ -33,7 +34,7 @@ typedef struct s_map
 	double		vx;
 	double		vy;
 	double		vz;
-	int			color;
+	uint32_t	color;
 	int			end;
 }				t_map;
 
@@ -52,9 +53,11 @@ typedef struct s_data
 t_map	**create_map(int fd);
 int		draw_map(t_map **map, char *title);
 
-void	fill_map_point(int x, int y, int z, t_map *point);
+void	fill_map_point(int x, int y, char *z, t_map *point);
 double	**map_easy_to_see(t_map **map);
 
 int		mlx_all_process(t_map **map, char *title);
+void	my_mlx_pix_put_image(t_data **data, int x, int y, int color);
+void	draw_line(t_map *p_0, t_map *p_1);
 
 #endif

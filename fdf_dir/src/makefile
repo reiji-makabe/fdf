@@ -1,0 +1,2 @@
+tags:
+	cd ../.. && ctags -R

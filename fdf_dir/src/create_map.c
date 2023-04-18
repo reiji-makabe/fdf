@@ -56,7 +56,6 @@ static t_map	**read_map(int fd, int row)
 	return (re);
 }
 
-// color now
 static t_map	*fill_map_row(char *txt, int index)
 {
 	char	*val;
@@ -64,12 +63,15 @@ static t_map	*fill_map_row(char *txt, int index)
 	size_t	j;
 	t_map	*row;
 
-	val = 
+	val = ft_split(txt, ' ');
+	i = 0;
+	while (val[i] != NULL)
+		i++;
 	row = (t_map *)malloc(sizeof(t_map) * (i + 1));
 	if (map == NULL)
 		return (NULL);
 	j = 0;
-	fill_map_point(0, 0, 0, row + i);
+	fill_map_point(0, 0, "0", row + i);
 	(row + i)->end = 1;
 	while (j++ < i)
 		fill_map_point(j - 1, index, val[j - 1], row + j - 1);
