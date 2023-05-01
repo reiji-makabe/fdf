@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 02:52:48 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/04/18 23:31:05 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/04/22 23:03:06 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ typedef struct s_map
 	int			end;
 }				t_map;
 
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*window;
+}			t_mlx;
+
 //image
 //bits_per_pixel
 //size_line
@@ -51,13 +57,19 @@ typedef struct s_data
 }				t_data;
 
 t_map	**create_map(int fd);
-int		draw_map(t_map **map, char *title);
+t_map	**init_map(int fd);
+void	clear_map(t_map **map);
+
+double	**make_matrix(void);
+double	**matrix_convert(double mat_li[4][4], double **mat);
+void	clear_matrix(double **mat);
 
 void	fill_map_point(int x, int y, char *z, t_map *point);
-double	**map_easy_to_see(t_map **map);
+double	**map_easy_to_see(t_map **map, double **mat);
 
 int		mlx_all_process(t_map **map, char *title);
-void	my_mlx_pix_put_image(t_data **data, int x, int y, int color);
-void	draw_line(t_map *p_0, t_map *p_1);
+void	my_mlx_pix_put_image(t_data *data, int x, int y, uint32_t color);
+void	draw_line(t_map *p_0, t_map *p_1, t_data *img);
+int		close_mlx(t_mlx *mlx);
 
 #endif

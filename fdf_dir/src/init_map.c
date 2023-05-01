@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:21:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/04/15 06:42:13 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/04/22 22:29:50 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-static void		convert_map(t_map **map, double **mat)
-static void		apply_point(t_map *point, double **mat);
-static double	**map_easy_to_see(t_map **map);
+static void	convert_map(t_map **map, double **mat);
+static void	apply_point(t_map *point, double **mat);
 
-int	draw_map(t_map **map, char *title)
+t_map	**init_map(int fd)
 {
-	double mat[4][4];
-
-	mat = {{0.707, 0.408, 0.0, 0.0},
+	double	mat[4][4] = {{0.707, 0.408, 0.0, 0.0},
 	{0.0, 0.816, 0.0, 0.0},
 	{-0.707, 0.408, 1.0, 0.0},
 	{0.0, 0.0, 0.0, 1.0}};
-	convert_map(map, &mat);
-	mat = map_easy_to_see(map);
-	convert_map(map, &mat);
-	return (mlx_all_process(map, title));
+	t_map	**map;
+	double	**mat_p;
+
+	map = create_map(fd);
+	if (map == NULL)
+		return (NULL);
+	mat_p = make_matrix();
+	if (mat_p == NULL)
+	{
+		clear_map(map);
+		return (NULL);
+	}
+	mat_p = matrix_convert(mat, mat_p);
+	convert_map(map, mat_p);
+	mat_p = map_easy_to_see(map, mat_p);
+	convert_map(map, mat_p);
+	clear_matrix(mat_p);
+	return (map);
 }
 
 static void	convert_map(t_map **map, double **mat)
@@ -48,7 +59,7 @@ static void	convert_map(t_map **map, double **mat)
 	}
 }
 
-static void	apply_point(t_map *point, double **mat)
+static void		apply_point(t_map *point, double **mat)
 {
 	double	x;
 	double	y;

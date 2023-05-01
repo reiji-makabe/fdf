@@ -58,7 +58,7 @@ static t_map	**read_map(int fd, int row)
 
 static t_map	*fill_map_row(char *txt, int index)
 {
-	char	*val;
+	char	**val;
 	size_t	i;
 	size_t	j;
 	t_map	*row;
@@ -68,7 +68,7 @@ static t_map	*fill_map_row(char *txt, int index)
 	while (val[i] != NULL)
 		i++;
 	row = (t_map *)malloc(sizeof(t_map) * (i + 1));
-	if (map == NULL)
+	if (row == NULL)
 		return (NULL);
 	j = 0;
 	fill_map_point(0, 0, "0", row + i);

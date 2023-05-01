@@ -6,45 +6,46 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 20:49:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/04/19 01:42:51 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/04/22 23:02:41 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-static int	my_mlx_init(void **mlx, void **window, t_dat *img);
-static void	mlx_draw_map(t_map **map, void *mlx, void *window, t_data *img);
+static int	my_mlx_init(t_mlx *mlx, t_data *img);
+static void	mlx_draw_map(t_map **map, t_data *img);
 static void	my_mlx_pix_put_image(t_data **data, int x, int y, int color);
 
 int	mlx_all_process(t_map **map, char *title)
 {
-	void	*mlx;
-	void	*window;
+	t_mlx	mlx;
 	t_data	img;
 
-	if (my_mlx_init(&mlx, &window, &img))
+	if (my_mlx_init(&mlx, &img))
 		return (1);
 	mlx_hook(window, );
-	mlx_draw_map(map, mlx, winodw, &img);
-	return (mlx_loop);
+	mlx_draw_map(map, &img);
+	mlx_put_image_to_window(mlx.mlx, mlx.window, img.img, SIZE_X, SIZE_Y);
+	mlx_destroy_image(mlx->mlx, &img);
+	return (mlx_loop(mlx->mlx));
 }
 
-static int	my_mlx_init(void **mlx, void **window, t_dat *img)
+static int	my_mlx_init(t_mlx *mlx, t_data *img)
 {
-	*mlx = mlx_init();
-	if (*mlx == NULL)
+	mlx->mlx = mlx_init();
+	if (mlx->mlx == NULL)
 		return (1);
-	*window = mlx_new_window(mlx, SIZE_X, SIZE_Y, );
-	if (*window == NULL)
+	mlx->window = mlx_new_window(mlx, SIZE_X, SIZE_Y, );
+	if (mlx->window == NULL)
 	{
-		mlx_destroy_display(*mlx);
+		mlx_destroy_display(mlx->mlx);
 		return (1);
 	}
-	img->img = mlx_new_image(*mlx, SIZE_X, SIZE_Y);
+	img->img = mlx_new_image(mlx->mlx, SIZE_X, SIZE_Y);
 	if (img->img == NULL)
 	{
-		mlx_destroy_window(*mlx, *window);
-		mlx_destroy_display(*mlx);
+		mlx_destroy_window(mlx->mlx, mlx->window);
+		mlx_destroy_display(mlx->mlx);
 		return (1);
 	}
 	img->addr = mlx_get_data_addr(img->img, &(img->bpp)
@@ -52,7 +53,7 @@ static int	my_mlx_init(void **mlx, void **window, t_dat *img)
 	return (0);
 }
 
-void	my_mlx_pix_put_image(t_data **data, int x, int y, int color)
+void	my_mlx_pix_put_image(t_data *data, int x, int y, uint32_t color)
 {
 	char	*dst;
 
@@ -60,7 +61,7 @@ void	my_mlx_pix_put_image(t_data **data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-static void	mlx_draw_map(t_map **map, void *mlx, void *window, t_data *img)
+static void	mlx_draw_map(t_map **map, t_mlx *mlx, t_data *img)
 {
 	int	row;
 	int	col;
@@ -68,11 +69,11 @@ static void	mlx_draw_map(t_map **map, void *mlx, void *window, t_data *img)
 	row = 0;
 	while (map[row])
 	{
-		col = 0;
-		while (map[row][col].end != 1)
+		col = 1;
+		while (map[row][col].end != 2)
 		{
-			draw_line(&map[row][col], &map[row][col + 1]);
-			draw_line(&map[row][col], &map[row + 1][col]);
+			draw_line(&map[row][col], &map[row][col + 2], img);
+			draw_line(&map[row][col], &map[row + 2][col], img);
 			col++;
 		}
 		row++;

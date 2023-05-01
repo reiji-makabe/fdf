@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:05:09 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/04/15 08:21:03 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/04/22 22:46:59 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	fill_map_point(int x, int y, char *z, t_map *point)
 static uint32_t	if_color_exist_fill_it(char *z)
 {
 	int			i;
-	char		*str;
+	char		**str;
 	uint32_t	color;
 
 	i = 0;
-	str == NULL;
+	str = NULL;
 	color = 0x00;
 	while (z[i] != 0)
 	{
@@ -72,4 +72,14 @@ static uint32_t	char_a_hex_to_uint32t(char *hex)
 		hex++;
 	}
 	return (re);
+}
+
+void	clear_map(t_map **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i] != NULL)
+		free(map[i++]);
+	free(map);
 }
