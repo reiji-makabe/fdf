@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:05:09 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/04/22 22:46:59 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/02 04:11:01 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ static uint32_t	if_color_exist_fill_it(char *z)
 
 	i = 0;
 	str = NULL;
-	color = 0x00;
+	color = WHITE;
 	while (z[i] != 0)
 	{
 		if (z[i] == ',')
 		{
 			str = ft_split(z, ',');
 			color = char_a_hex_to_uint32t(str[1]);
-			i++;
 		}
+		i++;
 	}
 	free(str);
 	return (color);

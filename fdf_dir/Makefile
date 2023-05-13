@@ -6,7 +6,7 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 19:53:21 by rmakabe           #+#    #+#              #
-#    Updated: 2023/04/07 16:00:04 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/05/02 02:30:25 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,16 @@ endif
 ifeq ($(shell uname), Linux)
 	LINK_DIR := -L ../minilibx-linux -L /usr/lib
 	LINK :=$(LINK_DIR) -lm -lz -lmlx -lXext -lX11
+	CFLAGS := -Wall -Wextra -Werror -lmlx $(DEBUG) $(SANITIZE) -I
 else
-	LINK_DIR :=
-	LINK :=$(LINK_DIR)
+	LINK_DIR := -L ../minilinx_macos -L /usr/lib
+	LINK :=$(LINK_DIR) -lm -lmlx
+	CFLAGS := -Wall -Wextra -Werror -lmlx -framework OpenGL -framework Appkit $(DEBUG) $(SANITIZE) -I
 endif
 
 # todo macOS
 
 
-CFLAGS := -Wall -Wextra -Werror -lmlx $(DEBUG) $(SANITIZE) -I
 RM := rm -rf
 AR := ar -rcs
 

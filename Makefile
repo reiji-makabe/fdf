@@ -6,7 +6,7 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 19:59:37 by rmakabe           #+#    #+#              #
-#    Updated: 2023/03/12 02:37:22 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/05/02 03:37:09 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ fclean: clean
 re: fclean all
 
 debug:
-	make WITH_DEBUG -C $(FILE)
+	make WITH_DEBUG=1 -C $(FILE)
 
 norm:
 	make norm -C $(FILE)
