@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:14:34 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/13 20:31:35 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:43:35 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,7 @@ int	main(int argc, char *argv[])
 	map = init_map(fd);
 	if (map == NULL)
 		exit (1);
-	if (mlx_all_process(map, argv[1]))
-	{
-		clear_map(map);
-		exit (1);
-	}
-	clear_map(map);
-	return (0);
+	return (mlx_all_process(map, argv[1]));
 }
 
 static int	safe_open(char *file, int aut)

@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 02:52:48 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/09 17:26:10 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/16 16:17:41 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	my_mlx_pix_put_image(t_data *data, int x, int y, uint32_t color);
 void	draw_line(t_map *p_0, t_map *p_1, t_data *img, t_mlx *mlx);
 int		close_mlx(t_mlx *mlx);
 
+void	print_map(t_map **map);
 #endif

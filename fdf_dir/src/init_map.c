@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:21:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/13 20:32:03 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/16 16:24:29 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_map	**init_map(int fd)
 	double	**mat_p;
 
 	map = create_map(fd);
+	print_map(map);
 	if (map == NULL)
 		return (NULL);
 	mat_p = make_matrix();
@@ -35,8 +36,8 @@ t_map	**init_map(int fd)
 	}
 	mat_p = matrix_convert(mat, mat_p);
 	convert_map(map, mat_p);
-//	mat_p = map_easy_to_see(map, mat_p);
-//	convert_map(map, mat_p);
+	mat_p = map_easy_to_see(map, mat_p);
+	convert_map(map, mat_p);
 	clear_matrix(mat_p);
 	return (map);
 }

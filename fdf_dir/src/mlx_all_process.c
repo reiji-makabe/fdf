@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 20:49:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/09 17:28:32 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:53:44 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	mlx_all_process(t_map **map, char *title)
 //	mlx_hook(mlx.window, 2, 1L<<0, close_mlx, &mlx);
 	mlx_draw_map(map, &img, &mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.window, img.img, SIZE_X, SIZE_Y);
-	mlx_destroy_image(mlx.mlx, &img);
+	mlx_destroy_image(mlx.mlx, img.img);
+	clear_map(map);
 	return (mlx_loop(mlx.mlx));
 }
 
