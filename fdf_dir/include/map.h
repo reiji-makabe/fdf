@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 02:52:48 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/16 16:17:41 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/16 21:57:32 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include <limits.h>
+# include <math.h>
 # include <stdlib.h>
 # include <mlx.h>
 # include <fcntl.h>

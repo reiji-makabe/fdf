@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 03:01:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/04/22 22:31:10 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/16 22:03:10 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ double	**map_easy_to_see(t_map **map, double **mat)
 	max_y = INT_MIN;
 	min_x = INT_MAX;
 	min_y = return_coordinate_max_and_min(map, &max_x, &max_y, &min_x);
-	mat = move_matrix(mat, max_x + min_x, max_y + min_y);
-	return (zoom_matrix(mat, max_x - min_x, max_y - min_y));
+	printf("%f:max_x, %f:max_y, %f:min_x, %f:min_y\n", max_x, max_y, min_x, min_y);
+	mat = move_matrix(mat, fabs(max_x) + fabs(min_x), fabs(max_y) + fabs(min_y));
+	return (zoom_matrix(mat, fabs(max_x) - fabs(min_x), fabs(max_y) - fabs(min_y)));
 }
 
 static double	return_coordinate_max_and_min(t_map **map, double *max_x,
@@ -47,14 +48,14 @@ static double	return_coordinate_max_and_min(t_map **map, double *max_x,
 		col = 0;
 		while (map[row][col].end != 1)
 		{
-			if (map[row][col].x > *max_x)
-				*max_x = map[row][col].x;
-			else if (map[row][col].y > *max_y)
-				*max_y = map[row][col].y;
-			else if (map[row][col].x < *min_x)
-				*min_x = map[row][col].x;
-			else if (map[row][col].y < min_y)
-				min_y = map[row][col].y;
+			if (map[row][col].vx > *max_x)
+				*max_x = map[row][col].vx;
+			else if (map[row][col].vy > *max_y)
+				*max_y = map[row][col].vy;
+			else if (map[row][col].vx < *min_x)
+				*min_x = map[row][col].vx;
+			else if (map[row][col].vy < min_y)
+				min_y = map[row][col].vy;
 			col++;
 		}
 		row++;
