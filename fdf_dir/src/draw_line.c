@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 23:18:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/16 18:47:04 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/16 19:04:44 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	draw_rightward_on_screen(t_map *p_0, t_map *p_1, t_mlx *mlx);
 static void	draw_leftward_on_screen(t_map *p_0, t_map *p_1, t_mlx *mlx);
-static int	y_has_moved(int p_0_vy, int p_1_vy, int *y, int d);
+static int	y_has_moved(int p_0_vy, int p_1_vy, int dx, int *d);
 
 void	draw_line(t_map *p_0, t_map *p_1, t_data *img, t_mlx *mlx)
 {
@@ -42,7 +42,7 @@ static void	draw_rightward_on_screen(t_map *p_0, t_map *p_1, t_mlx *mlx)
 	d = -1 * (dx >> 1);
 	while (x <= p_1->vx)
 	{
-		d -= dx * y_has_moved(p_0->vy, p_1->vy, &y, d);
+		y += y_has_moved(p_0->vy, p_1->vy, dx, &d);
 		d += dy;
 		mlx_pixel_put(mlx->mlx, mlx->window, x, y, p_0->color);
 		x++;
@@ -64,32 +64,35 @@ static void	draw_leftward_on_screen(t_map *p_0, t_map *p_1, t_mlx *mlx)
 	d = -1 * (dx >> 1);
 	while (x <= p_0->vx)
 	{
-		d -= dx * y_has_moved(p_1->vy, p_0->vy, &y, d);
+		y += y_has_moved(p_0->vy, p_1->vy, dx, &d);
 		d += dy;
 		mlx_pixel_put(mlx->mlx, mlx->window, x, y, p_0->color);
 		x++;
 	}
 }
 
-static int	y_has_moved(int p_0_vy, int p_1_vy, int *y, int d)
+static int	y_has_moved(int p_0_vy, int p_1_vy, int dx, int *d)
 {
-		if (p_0_vy < p_1_vy)
+	int	i;
+
+	i = 0;
+	if (p_0_vy < p_1_vy)
+	{
+		while (*d > 0)
 		{
-			if (d > 0)
-			{
-				*y += 1;
-				return (1);
-			}
+			*d -= dx;
+			i++;
 		}
-		else
+	}
+	else
+	{
+		if (*d < 0)
 		{
-			if (d < 0)
-			{
-				*y -= 1;
-				return (1);
-			}
+			*d -= dx;
+			i++;
 		}
-	return (0);
+	}
+	return (i);
 }
 
 //		my_mlx_pix_put_image(img, x, y, p_0->color);
