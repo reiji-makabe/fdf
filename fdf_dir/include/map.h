@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 02:52:48 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/16 21:57:32 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/21 11:40:41 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ typedef struct s_data
 	int		endian;
 	char	*addr;
 }				t_data;
+
+typedef struct s_draw
+{
+	int	dx;
+	int	dy;
+	int	d;
+	int	start_x;
+	int	start_y;
+	int	end_x;
+	int	end_y;
+}				t_draw;
 
 t_map	**create_map(int fd);
 t_map	**init_map(int fd);

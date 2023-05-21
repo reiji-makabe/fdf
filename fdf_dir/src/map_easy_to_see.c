@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 03:01:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/16 22:03:10 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/16 22:37:22 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static double	**move_matrix(double **mat, double max_x_plus_min_x,
 	mat[2][0] = 0;
 	mat[2][1] = 0;
 	mat[2][2] = 1;
-	mat[2][3] = 0;
+	mat[2][3] = 1;
 	mat[3][0] = 0;
 	mat[3][1] = 0;
 	mat[3][2] = 0;
@@ -103,8 +103,7 @@ static double	**zoom_matrix(double **mat, double x, double y)
 	if (mag_x > mag_y)
 		mag_x = mag_y;
 	mat[0][0] *= mag_x;
-	mat[0][3] *= mag_x;
 	mat[1][1] *= mag_x;
-	mat[1][3] *= mag_x;
+	mat[2][2] *= mag_x;
 	return (mat);
 }
