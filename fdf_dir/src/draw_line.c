@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 23:18:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/24 16:20:02 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/24 16:57:48 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	draw_line(t_map *p_0, t_map *p_1, t_data *img, t_mlx *mlx)
 		draw.d = -1 * (draw.dx >> 1);
 	else
 		draw.d = -1 * (draw.dy >> 1);
-	if (((p_0->vx <= p_1->vx) && (p_0->vy <= p_1->vy))
-			&& ((p_1->vx <= p_0->vx) && (p_1->vy <= p_1->vy)))
+	if (((p_0->vx <= p_1->vx) && (p_0->vy <= p_1->vy)) || ((p_1->vx <= p_0->vx) && (p_1->vy <= p_0->vy)))
 		draw.x_and_y_is_pos = 1;
 	else
 		draw.x_and_y_is_pos = 0;
@@ -44,19 +43,23 @@ void	draw_line(t_map *p_0, t_map *p_1, t_data *img, t_mlx *mlx)
 
 static void	put_value_t_draw(t_map *p_0, t_map *p_1, t_draw *draw)
 {
-	if (draw->x_and_y_is_pos)
+	if (p_0->vx < p_1->vx)
+		draw->s = p_0;
+	else if (p_0->vx > p_1->vx)
+		draw->s = p_1;
+	else
 	{
-		if (p_0->vx < p_1->vx)
+		if (p_0->vy < p_1->vy)
 			draw->s = p_0;
 		else
 			draw->s = p_1;
 	}
-	else
+	if (!draw->x_and_y_is_pos)
 	{
-		if (p_0->vx > p_1->vx)
-			draw->s = p_0;
-		else
+		if (draw->s == p_0)
 			draw->s = p_1;
+		else
+			draw->e = p_0;
 	}
 	if (draw->s == p_0)
 		draw->e = p_1;
