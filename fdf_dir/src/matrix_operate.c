@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 18:56:25 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/23 18:54:53 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/24 16:00:05 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 double	**zoom_matrix(double **mat, double magnifi);
 double	**move_matrix(double **mat, double x, double y);
 double	**anticlock_rotate_matrix(double **mat, int degree);
-
 /*
 	re = {{x, 0, 0, 0}
 		  {0, y, 0, 0}
@@ -25,16 +24,16 @@ double	**zoom_matrix(double **mat, double magnifi)
 {
 	mat[0][0] *= magnifi;
 	mat[0][1] *= magnifi;
-//	mat[0][2] *= magnifi;
+	mat[0][2] *= magnifi;
 	mat[1][0] *= magnifi;
 	mat[1][1] *= magnifi;
-//	mat[1][2] *= magnifi;
+	mat[1][2] *= magnifi;
 	mat[2][0] *= magnifi;
 	mat[2][1] *= magnifi;
-//	mat[2][2] *= magnifi;
+	mat[2][2] *= magnifi;
 	mat[3][0] *= magnifi;
 	mat[3][1] *= magnifi;
-//	mat[3][2] *= magnifi;
+	mat[3][2] *= magnifi;
 	return (mat);
 }
 
