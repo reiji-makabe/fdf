@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.c                                           :+:      :+:    :+:   */
+/*   matrix_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 06:47:30 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/04/22 22:48:16 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/23 18:14:14 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ double	**matrix_convert(double mat_li[4][4], double **mat)
 	mat[0][2] = mat_li[0][2];
 	mat[0][3] = mat_li[0][3];
 	mat[1][0] = mat_li[1][0];
+	mat[1][1] = mat_li[1][1];
 	mat[1][2] = mat_li[1][2];
 	mat[1][3] = mat_li[1][3];
 	mat[2][0] = mat_li[2][0];
@@ -30,6 +31,26 @@ double	**matrix_convert(double mat_li[4][4], double **mat)
 	mat[3][2] = mat_li[3][2];
 	mat[3][3] = mat_li[3][3];
 	return (mat);
+}
+
+void	matrix_copy(double mat_li[4][4], double **mat)
+{
+	mat_li[0][0] = mat[0][0];
+	mat_li[0][1] = mat[0][1];
+	mat_li[0][2] = mat[0][2];
+	mat_li[0][3] = mat[0][3];
+	mat_li[1][0] = mat[1][0];
+	mat_li[1][1] = mat[1][1];
+	mat_li[1][2] = mat[1][2];
+	mat_li[1][3] = mat[1][3];
+	mat_li[2][0] = mat[2][0];
+	mat_li[2][1] = mat[2][1];
+	mat_li[2][2] = mat[2][2];
+	mat_li[2][3] = mat[2][3];
+	mat_li[3][0] = mat[3][0];
+	mat_li[3][1] = mat[3][1];
+	mat_li[3][2] = mat[3][2];
+	mat_li[3][3] = mat[3][3];
 }
 
 double	**make_matrix(void)

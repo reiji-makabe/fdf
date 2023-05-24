@@ -6,19 +6,33 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 03:01:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/16 22:37:22 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/23 18:50:00 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
+static void	derive_number(t_map **map, double *move_x, double *move_y, double *zoom_num);
 static double	return_coordinate_max_and_min(t_map **map, double *max_x,
 					double *max_y, double *min_x);
-static double	**zoom_matrix(double **mat, double x, double y);
-static double	**move_matrix(double **mat, double max_x_plus_min_x,
-					double max_y_plus_min_y);
 
 double	**map_easy_to_see(t_map **map, double **mat)
+{
+	double	move_x;
+	double	move_y;
+	double	zoom_num;
+
+//	anticlock_rotate_matrix(mat, 90);
+//	convert_map(map, mat);
+	derive_number(map, &move_x, &move_y, &zoom_num);
+	mat = zoom_matrix(mat, zoom_num);
+//	derive_number(map, &move_x, &move_y, &zoom_num);
+//	mat = move_matrix(mat, move_x, move_y);
+//	convert_map(map, mat);
+	return (mat);
+}
+
+static void	derive_number(t_map **map, double *move_x, double *move_y, double *zoom_num)
 {
 	double	max_x;
 	double	max_y;
@@ -29,10 +43,13 @@ double	**map_easy_to_see(t_map **map, double **mat)
 	max_y = INT_MIN;
 	min_x = INT_MAX;
 	min_y = return_coordinate_max_and_min(map, &max_x, &max_y, &min_x);
-	printf("%f:max_x, %f:max_y, %f:min_x, %f:min_y\n", max_x, max_y, min_x, min_y);
-	mat = move_matrix(mat, fabs(max_x) + fabs(min_x), fabs(max_y) + fabs(min_y));
-	return (zoom_matrix(mat, fabs(max_x) - fabs(min_x), fabs(max_y) - fabs(min_y)));
+	*zoom_num = SIZE_X / (fabs(max_x) - fabs(min_x));
+	if (*zoom_num > SIZE_Y / (fabs(max_y) - fabs(min_y)))
+		*zoom_num = SIZE_Y / (fabs(max_y) - fabs(min_y));
+	*move_x = SIZE_X / fabs(max_x) + fabs(min_x);
+	*move_y = SIZE_Y / fabs(max_y) + fabs(min_y);
 }
+
 
 static double	return_coordinate_max_and_min(t_map **map, double *max_x,
 					double *max_y, double *min_x)
@@ -61,49 +78,4 @@ static double	return_coordinate_max_and_min(t_map **map, double *max_x,
 		row++;
 	}
 	return (min_y);
-}
-
-//	re = {{1, 0, 0, SIZE_X / 2 - (max_x + min_x) / 2},
-//	{0, 1, 0, SIZE_Y / 2 - (max_y + min_y) / 2},
-//	{0, 0, 1, 0},
-//	{0, 0, 0, 1}};
-static double	**move_matrix(double **mat, double max_x_plus_min_x,
-					double max_y_plus_min_y)
-{
-	mat[0][0] = 1;
-	mat[0][1] = 0;
-	mat[0][2] = 0;
-	mat[0][3] = SIZE_X / 2 - (max_x_plus_min_x) / 2;
-	mat[1][0] = 0;
-	mat[1][1] = 1;
-	mat[1][2] = 0;
-	mat[1][3] = SIZE_Y / 2 - (max_y_plus_min_y) / 2;
-	mat[2][0] = 0;
-	mat[2][1] = 0;
-	mat[2][2] = 1;
-	mat[2][3] = 1;
-	mat[3][0] = 0;
-	mat[3][1] = 0;
-	mat[3][2] = 0;
-	mat[3][3] = 1;
-	return (mat);
-}
-
-//	re = {{mag_x, 0, 0, mat[0][3] * mag_x},
-//	{0, mag_x, 0, mat[1][3] * mag_x},
-//	{0, 0, 1, 0},
-//	{0, 0, 0, 1}};
-static double	**zoom_matrix(double **mat, double x, double y)
-{
-	int		mag_x;
-	int		mag_y;
-
-	mag_x = SIZE_X / x;
-	mag_y = SIZE_Y / y;
-	if (mag_x > mag_y)
-		mag_x = mag_y;
-	mat[0][0] *= mag_x;
-	mat[1][1] *= mag_x;
-	mat[2][2] *= mag_x;
-	return (mat);
 }

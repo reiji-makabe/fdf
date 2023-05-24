@@ -1,0 +1,12 @@
+{a, b, c, d}  {a, b, c, d}
+{e, f, g, h}  {e, f, g, h}
+{i, j, k, l}  {i, j, k, l}
+{m, n, o, p}  {m, n, o, p}
+
+mat[0][0] = a1 * a2 + b1 * e2 + c1 * i2 + d1 * m2;
+mat[0][1] = a1 * b2 + b1 * f1 + c1 * j2 + d1 * n2;
+
+mat[1][0] = ea, fe, gi, hm;
+mat[1][2] = eb, ff, gj, hn;
+mat[2][0] = ia, je, ki, lm;
+mat[2][1] = ib, jf, kj, ln;

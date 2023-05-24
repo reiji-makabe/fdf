@@ -6,14 +6,11 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:21:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/16 22:44:12 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/23 18:47:57 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
-
-static void	convert_map(t_map **map, double **mat);
-static void	apply_point(t_map *point, double **mat);
 
 t_map	**init_map(int fd)
 {
@@ -35,14 +32,13 @@ t_map	**init_map(int fd)
 		return (NULL);
 	}
 	mat_p = matrix_convert(mat, mat_p);
-	convert_map(map, mat_p);
 	mat_p = map_easy_to_see(map, mat_p);
 	convert_map(map, mat_p);
 	clear_matrix(mat_p);
 	return (map);
 }
 
-static void	convert_map(t_map **map, double **mat)
+void	convert_map(t_map **map, double **mat)
 {
 	int	row;
 	int	col;
@@ -60,7 +56,7 @@ static void	convert_map(t_map **map, double **mat)
 	}
 }
 
-static void		apply_point(t_map *point, double **mat)
+void		apply_point(t_map *point, double **mat)
 {
 	double	x;
 	double	y;
@@ -69,7 +65,7 @@ static void		apply_point(t_map *point, double **mat)
 	x = point->vx;
 	y = point->vy;
 	z = point->vz;
-	point->vx = x * mat[0][0] + y * mat[1][0] + z * mat[2][0] + mat[3][0];
-	point->vy = x * mat[0][1] + y * mat[1][1] + z * mat[2][1] + mat[3][1];
-	point->vz = x * mat[0][2] + y * mat[1][2] + z * mat[2][2] + mat[3][2];
+	point->vx = x * mat[0][0] + y * mat[0][1] + z * mat[0][2] + mat[0][3];
+	point->vy = x * mat[1][0] + y * mat[1][1] + z * mat[1][2] + mat[1][3];
+	point->vz = x * mat[2][0] + y * mat[2][1] + z * mat[2][2] + mat[2][3];
 }
