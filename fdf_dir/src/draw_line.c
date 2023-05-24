@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 23:18:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/24 16:57:48 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/24 17:04:45 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	put_value_t_draw(t_map *p_0, t_map *p_1, t_draw *draw)
 		if (draw->s == p_0)
 			draw->s = p_1;
 		else
-			draw->e = p_0;
+			draw->s = p_0;
 	}
 	if (draw->s == p_0)
 		draw->e = p_1;
