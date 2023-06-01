@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 03:01:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/24 16:59:45 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/31 06:56:29 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ double	**map_easy_to_see(t_map **map, double **mat)
 	double	move_y;
 	double	zoom_num;
 
-//	anticlock_rotate_matrix(mat, 90);
-//	convert_map(map, mat);
+//	anticlock_rotate_matrix(mat, 100);
 	derive_number(map, &move_x, &move_y, &zoom_num);
 	printf("%f:zoom, %f:x, %f:y\n", zoom_num, move_x, move_y);
 	mat = zoom_matrix(mat, zoom_num);
-	mat = move_matrix(mat, 14, 1);
-//	convert_map(map, mat);
+	mat = move_matrix(mat, 3, -2);
 	return (mat);
 }
 

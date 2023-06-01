@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 23:18:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/24 17:04:45 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/30 09:27:58 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static void	draw_loop_neg(t_map *p_0, t_mlx *mlx, t_draw *draw)
 	}
 	else
 	{
-		while (y <= draw->e->y)
+		while (y <= draw->e->vy)
 		{
 			x -= num_is_moved(draw->e->vx, draw->s->vx, draw->dy, &(draw->d));
 			draw->d += draw->dx;

@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:21:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/24 16:01:05 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/30 10:01:53 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void		apply_point(t_map *point, double **mat)
 	y = point->vy;
 	z = point->vz;
 	point->vx = x * mat[0][0] + y * mat[0][1] + z * mat[0][2] + mat[0][3];
-	point->vy = x * mat[1][0] + y * mat[1][1] + z * mat[1][2] + mat[1][3];
+	point->vy = x * mat[1][0] + y * mat[1][1] + -z * mat[1][2] + mat[1][3];
 	point->vz = x * mat[2][0] + y * mat[2][1] + z * mat[2][2] + mat[2][3];
 }
