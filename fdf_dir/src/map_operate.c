@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:05:09 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/06/12 09:15:15 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/12 18:02:38 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static uint32_t	char_a_hex_to_uint32t(char *hex)
 	while (*hex != 0)
 	{
 		i = 0;
-		while (num_u[i] != *hex && num_U[i] != *hex && num_u[i] == 0)
+		while (num_u[i] != *hex && num_U[i] != *hex && num_u[i] != 0)
 			i++;
 		re = re * 16 + i;
 		hex++;

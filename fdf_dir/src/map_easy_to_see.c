@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 03:01:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/06/11 13:52:49 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/12 18:38:56 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ double	**map_easy_to_see(t_map **map, double **mat)
 
 	derive_number(map, &move_x, &move_y, &zoom_num);
 	mat = zoom_matrix(mat, zoom_num, zoom_num);
-	printf("%f:zoom, %f:x, %f:y\n", zoom_num, move_x, move_y);
+	convert_map(map, mat);
+	mat = matrix_unitize(mat);
+	derive_number(map, &move_x, &move_y, &zoom_num);
 	mat = move_matrix(mat, move_x, move_y);
 	return (mat);
 }
@@ -40,11 +42,11 @@ static void	derive_number(t_map **map, double *move_x, double *move_y, double *z
 	max_y = INT_MIN;
 	min_x = INT_MAX;
 	min_y = return_coordinate_max_and_min(map, &max_x, &max_y, &min_x);
-	*zoom_num = SIZE_X / (max_x - min_x) / 2;
-	if (*zoom_num > (SIZE_Y / (max_y - min_y) / 2))
-		*zoom_num = SIZE_Y / (max_y - min_y) / 2;
-	*move_x = ((SIZE_X / 2) - ((max_x + min_x) / 2)) / *zoom_num;
-	*move_y = ((SIZE_Y / 2) - ((max_y + min_y) / 2)) / *zoom_num;
+	*zoom_num = SIZE_X / (max_x - min_x);
+	if (*zoom_num > (SIZE_Y / (max_y - min_y)))
+		*zoom_num = SIZE_Y / (max_y - min_y);
+	*move_x = ((SIZE_X / 2) - ((max_x + min_x) / 2));
+	*move_y = ((SIZE_Y / 2) - ((max_y + min_y) / 2));
 }
 
 

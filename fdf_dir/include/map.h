@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 02:52:48 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/06/11 13:38:56 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/12 18:03:06 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,23 @@ typedef struct s_data
 	int		endian;
 	char	*addr;
 }				t_data;
+/*
+typedef struct s_color
+{
+	uint32_t	now_c;
+	uint32_t	
+}
+*/
 
 typedef struct s_draw
 {
+//	t_color	*color;
 	t_map	*s;
 	t_map	*e;
-	int	dx;
-	int	dy;
-	int	d;
-	int	x_and_y_is_pos;
+	int		dx;
+	int		dy;
+	int		d;
+	int		x_and_y_is_pos;
 }				t_draw;
 
 t_map	**create_map(int fd);
@@ -90,7 +98,7 @@ double	**z_rotate_matrix(double **mat, int degree);
 
 int		mlx_all_process(t_map **map, char *title);
 void	my_mlx_pix_put_image(t_data *data, int x, int y, uint32_t color);
-void	draw_line(t_map *p_0, t_map *p_1, t_data *img, t_mlx *mlx);
+void	draw_line(t_map *p_0, t_map *p_1, t_data *img);
 int		close_mlx(t_mlx *mlx);
 
 void	print_map(t_map **map);
