@@ -6,34 +6,22 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 18:56:25 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/24 16:00:05 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/11 13:23:55 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-double	**zoom_matrix(double **mat, double magnifi);
-double	**move_matrix(double **mat, double x, double y);
-double	**anticlock_rotate_matrix(double **mat, int degree);
-/*
-	re = {{x, 0, 0, 0}
-		  {0, y, 0, 0}
-		  {0, 0, z, 0},
-		  {0, 0, 0, 1}}; */
-double	**zoom_matrix(double **mat, double magnifi)
+double	**zoom_matrix(double **mat, double magnifi_x, double magnifi_y)
 {
-	mat[0][0] *= magnifi;
-	mat[0][1] *= magnifi;
-	mat[0][2] *= magnifi;
-	mat[1][0] *= magnifi;
-	mat[1][1] *= magnifi;
-	mat[1][2] *= magnifi;
-	mat[2][0] *= magnifi;
-	mat[2][1] *= magnifi;
-	mat[2][2] *= magnifi;
-	mat[3][0] *= magnifi;
-	mat[3][1] *= magnifi;
-	mat[3][2] *= magnifi;
+	mat[0][0] *= magnifi_x;
+	mat[0][1] *= magnifi_x;
+	mat[0][2] *= magnifi_x;
+	mat[0][3] *= magnifi_x;
+	mat[1][0] *= magnifi_y;
+	mat[1][1] *= magnifi_y;
+	mat[1][2] *= magnifi_y;
+	mat[1][3] *= magnifi_y;
 	return (mat);
 }
 
@@ -54,7 +42,7 @@ double	**move_matrix(double **mat, double x, double y)
  * 		 {sin(rad),  cos(rad), 0, 0}
  * 		 {		 0,			0, 1, 0}
  * 		 {		 0,			0, 0, 1} */
-double	**anticlock_rotate_matrix(double **mat, int degree)
+double	**z_rotate_matrix(double **mat, int degree)
 {
 	double	rad;
 	double	mat_c[4][4];

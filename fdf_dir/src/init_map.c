@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:21:31 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/30 10:01:53 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/11 13:50:29 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ t_map	**init_map(int fd)
 		return (NULL);
 	}
 	mat_p = matrix_convert(mat, mat_p);
+	mat_p = z_rotate_matrix(mat_p, 270);
+	convert_map(map, mat_p);
+	mat_p = matrix_unitize(mat_p);
 	mat_p = map_easy_to_see(map, mat_p);
 	convert_map(map, mat_p);
 	clear_matrix(mat_p);

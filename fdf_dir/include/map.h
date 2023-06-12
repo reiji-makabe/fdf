@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 02:52:48 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/24 03:18:10 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/11 13:38:56 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,16 @@ void	clear_map(t_map **map);
 
 double	**make_matrix(void);
 double	**matrix_convert(double mat_li[4][4], double **mat);
+double	**matrix_unitize(double **mat);
 void	matrix_copy(double mat_li[4][4], double **mat);
 void	clear_matrix(double **mat);
 
+
 void	fill_map_point(int x, int y, char *z, t_map *point);
 double	**map_easy_to_see(t_map **map, double **mat);
-double	**zoom_matrix(double **mat, double magnifi);
+double	**zoom_matrix(double **mat, double magnifi_x, double magnifi_y);
 double	**move_matrix(double **mat, double x, double y);
-double	**anticlock_rotate_matrix(double **mat, int degree);
+double	**z_rotate_matrix(double **mat, int degree);
 
 int		mlx_all_process(t_map **map, char *title);
 void	my_mlx_pix_put_image(t_data *data, int x, int y, uint32_t color);

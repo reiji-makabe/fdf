@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 23:18:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/06/09 18:57:48 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/05/30 09:27:58 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	draw_loop_pos(t_map *p_0, t_mlx *mlx, t_draw *draw)
 	}
 	else
 	{
-		while (y <= draw->e->vy)
+		while (y <= draw->e->y)
 		{
 			x += num_is_moved(draw->s->vx, draw->e->vx, draw->dy, &(draw->d));
 			draw->d += draw->dx;

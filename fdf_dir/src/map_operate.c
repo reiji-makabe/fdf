@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:05:09 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/05/02 04:11:01 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/12 09:15:15 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,18 @@ static uint32_t	if_color_exist_fill_it(char *z)
 static uint32_t	char_a_hex_to_uint32t(char *hex)
 {
 	char		*num_u;
+	char		*num_U;
 	uint32_t	re;
 	int			i;
 
 	re = 0;
 	num_u = "0123456789abcdef";
+	num_U = "0123456789ABCDEF";
 	hex += 2;
 	while (*hex != 0)
 	{
 		i = 0;
-		while (num_u[i] != *hex || num_u[i] == 0)
+		while (num_u[i] != *hex && num_U[i] != *hex && num_u[i] == 0)
 			i++;
 		re = re * 16 + i;
 		hex++;
