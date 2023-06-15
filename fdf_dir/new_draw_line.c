@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 23:18:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/06/14 10:44:38 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/13 17:36:53 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	draw_loop_pos(t_data *img, t_draw *draw)
 		{
 			y += num_is_moved(draw->s->vy, draw->e->vy, draw->dx, &(draw->d));
 			draw->d += draw->dy;
-			my_mlx_pix_put_image(img, x, y, draw);
+			my_mlx_pix_put_image(img, x, y, draw->color);
 			x++;
 		}
 	}
@@ -92,7 +92,7 @@ static void	draw_loop_pos(t_data *img, t_draw *draw)
 		{
 			x += num_is_moved(draw->s->vx, draw->e->vx, draw->dy, &(draw->d));
 			draw->d += draw->dx;
-			my_mlx_pix_put_image(img, x, y, draw);
+			my_mlx_pix_put_image(img, x, y, draw->color);
 			y++;
 		}
 	}
@@ -111,7 +111,7 @@ static void	draw_loop_neg(t_data *img, t_draw *draw)
 		{
 			y += num_is_moved(draw->s->vy, draw->e->vy, draw->dx, &(draw->d));
 			draw->d += draw->dy;
-			my_mlx_pix_put_image(img, x, y, draw);
+			my_mlx_pix_put_image(img, x, y, draw->color);
 			x--;
 		}
 	}
@@ -121,7 +121,7 @@ static void	draw_loop_neg(t_data *img, t_draw *draw)
 		{
 			x -= num_is_moved(draw->e->vx, draw->s->vx, draw->dy, &(draw->d));
 			draw->d += draw->dx;
-			my_mlx_pix_put_image(img, x, y, draw);
+			my_mlx_pix_put_image(img, x, y, draw->color);
 			y++;
 		}
 	}

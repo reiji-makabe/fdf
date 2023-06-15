@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 02:52:48 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/06/12 18:03:06 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/15 18:42:02 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,20 @@ typedef struct s_data
 	int		endian;
 	char	*addr;
 }				t_data;
-/*
+
 typedef struct s_color
 {
-	uint32_t	now_c;
-	uint32_t	
-}
-*/
+	uint32_t	start_c;
+	uint32_t	diff_c;
+	double		length;
+	int			np;
+}				t_color;
 
 typedef struct s_draw
 {
-//	t_color	*color;
 	t_map	*s;
 	t_map	*e;
+	t_color	*color;
 	int		dx;
 	int		dy;
 	int		d;
@@ -97,9 +98,11 @@ double	**move_matrix(double **mat, double x, double y);
 double	**z_rotate_matrix(double **mat, int degree);
 
 int		mlx_all_process(t_map **map, char *title);
-void	my_mlx_pix_put_image(t_data *data, int x, int y, uint32_t color);
+void	my_mlx_pix_put_image(t_data *data, int x, int y, t_draw *draw);
 void	draw_line(t_map *p_0, t_map *p_1, t_data *img);
 int		close_mlx(t_mlx *mlx);
+void	put_value_t_color(t_draw *draw, t_color *color);
+uint32_t	defined_pixel_color(t_draw *draw, int x, int y);
 
 void	print_map(t_map **map);
 #endif

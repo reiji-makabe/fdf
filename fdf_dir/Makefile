@@ -6,7 +6,7 @@
 #    By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 19:53:21 by rmakabe           #+#    #+#              #
-#    Updated: 2023/05/02 02:30:25 by rmakabe          ###   ########.fr        #
+#    Updated: 2023/06/13 18:06:19 by rmakabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,12 +52,13 @@ OBJ := $(addprefix $(OBJ_DIR), $(notdir $(SRC:.c=.o)))
 all: $(NAME)
 
 $(NAME):$(OBJ)
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(ARCHIVE_DIR)
 	make $(ARCHIVE)
 	$(CC) $(CFLAGS) $(INCLUDE) $^ -o $(NAME) $(ARCHIVE) $(LINK)
 
 
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(ARCHIVE):

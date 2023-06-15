@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 20:49:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/06/12 14:03:38 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/14 10:45:58 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,14 @@ static int	my_mlx_init(t_mlx *mlx, t_data *img, char *title)
 	return (0);
 }
 
-void	my_mlx_pix_put_image(t_data *data, int x, int y, uint32_t color)
+void	my_mlx_pix_put_image(t_data *data, int x, int y, t_draw *draw)
 {
-	char	*dst;
+	char		*dst;
+	uint32_t	color_now;
 
 	dst = data->addr + (y * data->size_l + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
+	color_now = defined_pixel_color(draw, x, y);
+	*(unsigned int*)dst = color_now;
 }
 
 static void	mlx_draw_map(t_map **map, t_data *img)
