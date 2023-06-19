@@ -13,7 +13,7 @@ void	print_map(t_map **map)
 		printf("%d:", i);
 		while (map[i][j].end != 1)
 		{
-			printf("%2d ", (int)map[i][j].vz);
+			printf("%2d ", (int)map[i][j].vx);
 			j++;
 		}
 		printf("\n");

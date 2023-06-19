@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:59:00 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/06/15 20:08:44 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/15 20:12:43 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,5 @@ uint32_t	defined_pixel_color(t_draw *draw, int x, int y)
 	red = (uint32_t)(((color->diff_c & 0xff0000) >> 16) * ratio) << 16;
 	green = (uint32_t)(((color->diff_c & 0x00ff00) >> 8) * ratio) << 8;
 	blue = ((color->diff_c & 0x0000ff)) * ratio;
-//	printf("r:%x, g:%x, b:%x\n", red, blue, green);
 	return (color->start_c + color->np * (red + green + blue));
 }

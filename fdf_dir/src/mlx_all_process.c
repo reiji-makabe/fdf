@@ -6,7 +6,7 @@
 /*   By: rmakabe <rmkabe012@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 20:49:07 by rmakabe           #+#    #+#             */
-/*   Updated: 2023/06/14 10:45:58 by rmakabe          ###   ########.fr       */
+/*   Updated: 2023/06/15 20:31:59 by rmakabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,10 @@ static void	mlx_draw_map(t_map **map, t_data *img)
 		}
 		row++;
 	}
+	t_draw draw;
+	t_color color;
+	draw.color = &color;
+	color.np = 0;
+	color.start_c = 0x00ff00;
+	my_mlx_pix_put_image(img, 600, 400, &draw);
 }
